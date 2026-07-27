@@ -3454,6 +3454,13 @@ void Mle::ProcessAddressSolicit(AddrSolicitInfo &aInfo)
         ExitNow();
     }
 
+    // RENODE: cap the network at 2 routers (this leader + the otbr border router). Deny router
+    // upgrade to the stock emulated device so it stays a STABLE CHILD of the leader instead of
+    // promoting (router-role MLE / partitioning is unreliable across the Renode virtual-time
+    // boundary -> the device oscillates/self-partitions). otbr solicits when count==1 (granted);
+    // the device solicits when count==2 (denied -> stays a REED child).
+    VerifyOrExit(Get<RouterTable>().GetActiveRouterCount() < 2);
+
     switch (aInfo.mReason)
     {
     case kReasonTooFewRouters:

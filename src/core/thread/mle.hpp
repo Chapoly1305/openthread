@@ -1300,8 +1300,8 @@ private:
     static constexpr uint32_t kAnnounceProcessTimeout        = 250;  // Delay after Announce rx before processing
     static constexpr uint32_t kAnnounceTimeout               = 1400; // Total timeout for sending Announce messages
     static constexpr uint16_t kMinAnnounceDelay              = 80;   // Min delay between Announcement messages
-    static constexpr uint32_t kParentResponseMaxDelayRouters = 500;  // Max response delay for Parent Req to routers
-    static constexpr uint32_t kParentResponseMaxDelayAll     = 1000; // Max response delay for Parent Req to all
+    static constexpr uint32_t kParentResponseMaxDelayRouters = 4;    // Max response delay for Parent Req to routers
+    static constexpr uint32_t kParentResponseMaxDelayAll     = 4;  // Max response delay for Parent Req to all
     static constexpr uint32_t kChildUpdateRequestDelay       = 100;  // Delay for aggregating Child Update Req
     static constexpr uint32_t kMaxLinkRequestDelayOnRouter   = 1000; // Max delay to tx Link Request on Adv rx
     static constexpr uint32_t kMinLinkRequestDelayOnChild    = 1500; // Min delay to tx Link Request on Adv rx (child)
@@ -1441,7 +1441,7 @@ private:
         kReattachPending, // Reattach using stored Pending Dataset
     };
 
-    static constexpr uint16_t kMleMaxResponseDelay = 1000u; // Max delay before responding to a multicast request.
+    static constexpr uint16_t kMleMaxResponseDelay = 4u;  // Max delay before responding to a multicast request.
 
     enum AddressRegistrationMode : uint8_t // Used by `AppendAddressRegistrationTlv()`
     {
