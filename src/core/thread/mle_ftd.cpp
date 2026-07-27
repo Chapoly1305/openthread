@@ -3454,6 +3454,14 @@ void Mle::ProcessAddressSolicit(AddrSolicitInfo &aInfo)
         ExitNow();
     }
 
+    // RENODE: keep emulated router-eligible devices as REED children. Router promotion
+    // (router-router MLE link maintenance / partitioning) is unreliable across the Renode
+    // virtual-time <-> host real-time boundary and makes the device oscillate instead of
+    // settling. A stable child parents to otbr fine, gets an OMR address, registers SRP,
+    // and is reachable for Matter operational. Deny new router-id allocation (mResponse
+    // stays kAddrSolicitNoAddressAvailable); existing routers are handled above.
+    ExitNow();
+
     switch (aInfo.mReason)
     {
     case kReasonTooFewRouters:

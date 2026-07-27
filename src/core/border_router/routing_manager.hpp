@@ -584,10 +584,10 @@ private:
     // interval + jitter].
 
     static constexpr uint32_t kInitialRaTxCount   = 3;
-    static constexpr uint32_t kInitialRaInterval  = Time::kOneSecondInMsec * 16;
-    static constexpr uint16_t kInitialRaJitter    = Time::kOneSecondInMsec * 2;
-    static constexpr uint32_t kRaBeaconInterval   = Time::kOneSecondInMsec * 180; // 3 minutes
-    static constexpr uint16_t kRaBeaconJitter     = Time::kOneSecondInMsec * 15;
+    static constexpr uint32_t kInitialRaInterval  = Time::kOneSecondInMsec * 2;  // RENODE: 16->2 (publish OMR to the new leader's netdata within seconds of a partition merge, not ~48-89s, so it lands inside the Matter commissioning fail-safe window)
+    static constexpr uint16_t kInitialRaJitter    = Time::kOneSecondInMsec * 1;  // RENODE: 2->1
+    static constexpr uint32_t kRaBeaconInterval   = Time::kOneSecondInMsec * 20; // RENODE: 180->20
+    static constexpr uint16_t kRaBeaconJitter     = Time::kOneSecondInMsec * 2;  // RENODE: 15->2
     static constexpr uint32_t kMinDelayBetweenRas = Time::kOneSecondInMsec * 3;
     static constexpr uint32_t kRsReplyInterval    = 250;
     static constexpr uint16_t kRsReplyJitter      = 250;

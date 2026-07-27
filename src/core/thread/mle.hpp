@@ -1277,16 +1277,16 @@ private:
     static constexpr uint32_t kAnnounceProcessTimeout        = 250;  // Delay after Announce rx before processing
     static constexpr uint32_t kAnnounceTimeout               = 1400; // Total timeout for sending Announce messages
     static constexpr uint16_t kMinAnnounceDelay              = 80;   // Min delay between Announcement messages
-    static constexpr uint32_t kParentResponseMaxDelayRouters = 500;  // Max response delay for Parent Req to routers
-    static constexpr uint32_t kParentResponseMaxDelayAll     = 1000; // Max response delay for Parent Req to all
+    static constexpr uint32_t kParentResponseMaxDelayRouters = 4;    // RENODE: near-0 (lone router; virtual-time child window)
+    static constexpr uint32_t kParentResponseMaxDelayAll     = 4;    // RENODE: near-0 (lone router; virtual-time child window)
     static constexpr uint32_t kChildUpdateRequestDelay       = 100;  // Delay for aggregating Child Update Req
-    static constexpr uint32_t kMaxLinkRequestDelayOnRouter   = 1000; // Max delay to tx Link Request on Adv rx
+    static constexpr uint32_t kMaxLinkRequestDelayOnRouter   = 4;    // RENODE: near-0 (was 1000) fast router-link setup
     static constexpr uint32_t kMinLinkRequestDelayOnChild    = 1500; // Min delay to tx Link Request on Adv rx (child)
     static constexpr uint32_t kMaxLinkRequestDelayOnChild    = 3000; // Max delay to tx Link Request on Adv rx (child)
-    static constexpr uint32_t kMaxLinkAcceptDelay            = 1000; // Max delay to tx Link Accept for multicast Req
+    static constexpr uint32_t kMaxLinkAcceptDelay            = 4;    // RENODE: near-0 (was 1000) fast router-link setup
     static constexpr uint32_t kChildIdRequestTimeout         = 5000; // Max delay to rx a Child ID Req after Parent Res
     static constexpr uint32_t kLinkRequestTimeout            = 2000; // Max delay to rx a Link Accept
-    static constexpr uint32_t kUnicastRetxDelay              = 1000; // Base delay for MLE unicast retx
+    static constexpr uint32_t kUnicastRetxDelay              = 150;  // RENODE: faster MLE unicast retx (was 1000)
     static constexpr uint32_t kMulticastRetxDelay            = 5000; // Base delay for MLE multicast retx
     static constexpr uint32_t kMulticastRetxDelayMin         = kMulticastRetxDelay * 9 / 10;  // 0.9 * base delay
     static constexpr uint32_t kMulticastRetxDelayMax         = kMulticastRetxDelay * 11 / 10; // 1.1 * base delay
@@ -1342,7 +1342,7 @@ private:
     static constexpr uint32_t kAdvIntervalMaxLogRoutes = 5000;
 #endif
 
-    static constexpr uint32_t kMaxUnicastAdvertisementDelay  = 1000;   // Max random delay for unciast Adv tx
+    static constexpr uint32_t kMaxUnicastAdvertisementDelay  = 4;      // RENODE: near-0 (was 1000)
     static constexpr uint32_t kMaxNeighborAge                = 100000; // Max neighbor age on router (in msec)
     static constexpr uint32_t kMaxNeighborAgeOnChild         = 150000; // Max neighbor age on FTD child (in msec)
     static constexpr uint32_t kMaxLeaderToRouterTimeout      = 90000;  // (in msec)
@@ -1353,7 +1353,7 @@ private:
     static constexpr uint8_t  kRouterUpgradeThreshold        = 16;
     static constexpr uint16_t kDiscoveryMaxJitter            = 250; // Max jitter delay Discovery Responses (in msec).
     static constexpr uint32_t kMaxScheduledDiscoveryResponse = 16;  // Rate-limit Discovery response.
-    static constexpr uint16_t kUnsolicitedDataResponseJitter = 500; // Max delay for unsol Data Response (in msec).
+    static constexpr uint16_t kUnsolicitedDataResponseJitter = 4;   // RENODE: near-0 (was 500) fast netdata sync
     static constexpr uint8_t  kLeaderDowngradeExtraDelay     = 10;  // Extra delay to downgrade leader (in sec).
     static constexpr uint8_t  kDefaultLeaderWeight           = 64;
     static constexpr uint8_t  kAlternateRloc16Timeout        = 8; // Time to use alternate RLOC16 (in sec).
@@ -1418,7 +1418,7 @@ private:
         kReattachPending, // Reattach using stored Pending Dataset
     };
 
-    static constexpr uint16_t kMleMaxResponseDelay = 1000u; // Max delay before responding to a multicast request.
+    static constexpr uint16_t kMleMaxResponseDelay = 4u; // RENODE: near-0 (was 1000) to fit virtual-time child windows.
 
     enum AddressRegistrationMode : uint8_t // Used by `AppendAddressRegistrationTlv()`
     {
